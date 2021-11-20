@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import {useRoutes} from 'react-router-dom'
+
+import Header from './components/Header'
+import PostContainer from './components/PostContainer'
+import Footer from './Layout/Footer'
+import Navbar from './Layout/Navbar'
+import PostView from './components/PostView'
+import About from './components/About'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  let routes = useRoutes([
+    {
+      path: '/',
+      element: [<Navbar />, <Header />, <PostContainer />, <Footer />],
+    },
+    {path: 'post/:id', element: [<Navbar />, <PostView />, <Footer />]},
+    {path: 'about', element: [<Navbar />, <About />, <Footer />]},
+    {path: '*', element: [<div><p>There's nothing here!</p></div>]}
+  ])
+
+  return routes
 }
 
-export default App;
+export default App
